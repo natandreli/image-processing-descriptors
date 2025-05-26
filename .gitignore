@@ -2,8 +2,10 @@
 __pycache__/
 *.pyc
 
-data/flowers/
+data
 data/dataset/
-*.mat
+
+models
+*.pkl
 
 *.log

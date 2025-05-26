@@ -1,6 +1,7 @@
 from preprocessing.loader import load_dataset
 from descriptors.hog import extract_hog_features
-from models.train_svm import train_svm
+from descriptors.lab import extract_lab_features
+from model.train_svm import train_svm
 
 def main():
     print("[INFO] Loading dataset...")
@@ -9,10 +10,11 @@ def main():
 
     print("[INFO] Extracting HOG features...")
     hog_features = extract_hog_features(images)
-    print(f"[INFO] Feature matrix shape: {hog_features.shape}")
+    train_svm(hog_features, labels, name_prefix='hog')
 
-    print("[INFO] Training classifier...")
-    model, encoder = train_svm(hog_features, labels)
+    print("[INFO] Extracting LAB features...")
+    lab_features = extract_lab_features(images)
+    train_svm(lab_features, labels, name_prefix='lab')
 
 if __name__ == "__main__":
     main()
